@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>Search</title>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class='container-fluid'>
+    <div class='form-row'>
+        <div class='form-group col-md-4 mb-0'>
+        </div>
+        <div class='form-group col-md-4 mb-0'>
+            <form method="post">
+                {% csrf_token %}
+                {{ search_filter.form.oic | as_crispy_field }}
+                {{ search_filter.form.exhibitRef | as_crispy_field }}
+                {{ search_filter.form.description | as_crispy_field }}
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class='form-group col-md-4 mb-0'>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+    <div class="container-fluid">
+        {% for i in items %}
+        <div class='form-row'>
+        <div class='form-group col-md-4 mb-0'>
+        </div>
+        <div class='form-group col-md-4 mb-0'>
+            <div class="card m-1">
+                <h6 class="card-title text-center">{{i.propertyReference}}</h5>
+                <img class="img-fluid" src="/media/{{i.image}}" alt="image not available">
+                <div class="card-body">
+                    <h6 class="card-subtitle mb-2 text-muted text-center">{{i.description}}</h6>
+                    <p class="card-text">Created on: {{i.createdDate}}<br>Created by: {{i.user}}</p>
+                    <a href="#" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div>
+        <div class='form-group col-md-4 mb-0'>
+        </div>
+        </div>
+        {% endfor %}
+    </div>

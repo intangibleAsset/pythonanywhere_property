@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>Search results</title>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+    <div class="container-fluid">
+
+        <div class='form-row'>
+            <div class='form-group col-md-4 mb-0'>
+            </div>
+            <div class='form-group col-md-4 mb-0'>
+                <p class='text-center'>Your recent items</p>
+                {% for i in search_filter.qs %}
+                    <a href="/{{i.id}}">
+                        <div class="card m-1">
+                                <div class="card-body">
+                                    <p class="card-text text-center">{{i.description}}<br>{{i.seizedLocation}}</p>
+                                </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class='form-group col-md-4 mb-0'>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
