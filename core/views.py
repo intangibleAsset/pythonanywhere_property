@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import UpdateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from datetime import date
@@ -25,6 +26,19 @@ def make_property_reference():
         new_ref_no = 'IOM/' + str(new_ref_int) + '/' + date.today().strftime('%y')
         return new_ref_no
 
+class UpdateItem(LoginRequiredMixin, UpdateView):
+    login_url = '/accounts/login/'
+    model = Item
+    fields = [
+                'description',
+                'seizedBy',
+                'exhibitRef',
+                'seizedDate',
+                'seizedTime',
+                'seizedLocation',
+            ]
+    template_name_suffix = '_update_form'
+    success_url = '/'
 
 class Index(LoginRequiredMixin,View):
     login_url = '/accounts/login/'

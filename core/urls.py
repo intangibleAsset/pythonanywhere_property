@@ -8,5 +8,6 @@ urlpatterns = [
     path('addItem/',views.Add.as_view(),name='add'),
     path('<int:pk>/', views.ItemDetailView.as_view(), name='detail'),
     path('addImage/<int:pk>/', views.AddImageView.as_view(), name='image'),
+    path('updateItem/<int:pk>/', views.UpdateItem.as_view(), name='update'),
     path('',views.Index.as_view(),name='index'),
 ]

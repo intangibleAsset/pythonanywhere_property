@@ -9,12 +9,14 @@
 
 
 <div class="container-fluid">
+    {% if items %}
     {% for i in items %}
     <div class='form-row'>
         <div class='form-group col-md-4'>
         </div>
         <div class='form-group col-md-4'>
                 <div class="card m-1 card-custom-bg">
+                    <a href="/{{i.id}}" class="btn btn-primary m-1">Details</a>
                     <h6 class="card-title text-center">{{i.description}}</h6>
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted text-center">{{i.propertyReference}}</h6>
@@ -30,13 +32,23 @@
                         </p>
 
                     </div>
-                    <a href="/{{i.id}}" class="btn btn-primary">Details</a>
                 </div>
         </div>
         <div class='form-group col-md-4'>
         </div>
     </div>
     {% endfor %}
+    {% else %}
+    <div class='form-row'>
+    <div class='form-group col-md-4'>
+    </div>
+    <div class='form-group col-md-4'>
+        <p class="text-center">Your recent items will be shown here</p>
+    </div>
+    <div class='form-group col-md-4'>
+    </div>
+    </div>
+    {% endif %}
 </div>
 
 

@@ -6,4 +6,4 @@ class SearchFilter(django_filters.FilterSet):
     seizedLocation = django_filters.CharFilter(lookup_expr='icontains')
     class Meta:
         model = Item
-        fields = ['oic', 'exhibitRef']
+        fields = ['exhibitRef','seizedBy']

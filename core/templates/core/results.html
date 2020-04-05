@@ -7,27 +7,49 @@
 {% block content %}
 {% load static %}
 
-    <div class="container-fluid">
+<div class="container-fluid">
+    {% if search_filter.qs %}
+    {% for i in search_filter.qs %}
+    <div class='form-row'>
+        <div class='form-group col-md-4'>
+        </div>
+        <div class='form-group col-md-4'>
+                <div class="card m-1 card-custom-bg">
+                    <a href="/{{i.id}}" class="btn btn-primary m-1">Details</a>
+                    <h6 class="card-title text-center">{{i.description}}</h6>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted text-center">{{i.propertyReference}}</h6>
+                        <p class="card-text text-center">
+                        <p class='text-center'>Seized / Found location: {{i.seizedLocation}}</p>
+                        <p class='text-center'>Seized on: {{i.seizedDate}} at {{i.seizedTime}}</p>
+                        {% if i.itemimage_set.all %}
+                            <img class="card-img-top" src="{{i.itemimage_set.all.0.thumbnail.url}}" alt="Card image cap">
+                        {% else %}
+                            <img class="card-img-top" src="/media/home/tolca/property/media/no_image.jpg" alt="Card image cap">
+                        {% endif %}
+                        </p>
 
-        <div class='form-row'>
-            <div class='form-group col-md-4 mb-0'>
-            </div>
-            <div class='form-group col-md-4 mb-0'>
-                <p class='text-center'>Your recent items</p>
-                {% for i in search_filter.qs %}
-                    <a href="/{{i.id}}">
-                        <div class="card m-1">
-                                <div class="card-body">
-                                    <p class="card-text text-center">{{i.description}}<br>{{i.seizedLocation}}</p>
-                                </div>
-                        </div>
-                    </a>
-                {% endfor %}
-            </div>
-            <div class='form-group col-md-4 mb-0'>
-            </div>
+                    </div>
+                </div>
+        </div>
+        <div class='form-group col-md-4'>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class='form-row'>
+        <div class='form-group col-md-4'>
+        </div>
+        <div class='form-group col-md-4 text-center'>
+            <p>No items match your query</p>
+            <a href={% url 'search' %} class="btn btn-primary">Search again</a>
+        </div>
+        <div class='form-group col-md-4'>
         </div>
 
     </div>
+    {% endif %}
+</div>
+
 
 {% endblock %}

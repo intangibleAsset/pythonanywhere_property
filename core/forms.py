@@ -9,12 +9,11 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = [
             'description',
-            'oic',
+            'seizedBy',
             'exhibitRef',
             'seizedDate',
             'seizedTime',
             'seizedLocation',
-            'notes',
         ]
 
 class AddImageForm(forms.ModelForm):
